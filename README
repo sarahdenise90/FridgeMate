@@ -17,3 +17,7 @@ Run your App
 cd MyApp
 ionic serve
 ```
+
+Start Json-server
+```
+json-server --watch db.json
