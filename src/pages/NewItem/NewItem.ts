@@ -19,8 +19,6 @@ export class NewItemPage {
 
   addToList($event, item: Item){
 
-
-    //hello
     $event.stopPropagation();
 
     this.listService.addListItem(Item);
