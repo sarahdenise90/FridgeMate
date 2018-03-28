@@ -13,7 +13,7 @@
       <ion-icon name="ionic" item-start></ion-icon>-->
       <ion-item>
       <ion-label>New Item</ion-label>
-      <ion-input> type="text"</ion-input>
+      <ion-input> type="text" id="food"</ion-input>
       <p></p>
     </ion-item>
 
@@ -22,7 +22,8 @@
      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
     </ion-item><b></b>
 
-  <button ion-button (click)="addtoList()">Store food!</button>
+
+  <button ion-button (click)="addToList">Store food!</button>
     
   </ion-list>
 </ion-content>

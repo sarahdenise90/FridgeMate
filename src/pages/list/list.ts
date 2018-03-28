@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { NavController, Item } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import {AlertController} from 'ionic-angular';
 import {ListItem} from '../../models';
 import {ListService} from '../../providers';
+import { Http, Response } from '@angular/http';
+import { HTTP } from '@ionic-native/http';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'page-list',
@@ -12,14 +16,18 @@ import {ListService} from '../../providers';
 })
 
 
-export class ListPage implements OnInit {
-  list: ListItem[] =[];
 
-  constructor(public navCtrl: NavController, private listService: ListService, private alertCtrl: AlertController) {
+@Injectable()
+export class ListPage implements OnInit {
+  list: ListItem[] =[];  // war mal zum testen: Observable<any>
+
+  constructor(public navCtrl: NavController, private listService: ListService, private alertCtrl: AlertController, public http: HTTP) {
+
 
   }
   ngOnInit(): void {
     this.list= this.listService.getList();
+  
   }
 
   ionViewDidEnter(): void{
@@ -35,6 +43,7 @@ export class ListPage implements OnInit {
     alert.present();
   }
 
+  
 removeFromList(index: number): void{
   this.listService.removeListItem(index);
 }

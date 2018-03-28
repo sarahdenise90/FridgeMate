@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Item } from 'ionic-angular';
 import {ListService} from '../../providers';
+import { HTTP } from '@ionic-native/http';
+
 
 @Component({
   selector: 'page-newitem',
@@ -12,7 +14,7 @@ import {ListService} from '../../providers';
 export class NewItemPage {
 
 
-  constructor(public navCtrl: NavController, private listService: ListService ) {
+  constructor(public navCtrl: NavController, private listService: ListService, private http: HTTP ) {
 
   }
 
@@ -23,5 +25,4 @@ export class NewItemPage {
 
     this.listService.addListItem(Item);
   }
-
 }

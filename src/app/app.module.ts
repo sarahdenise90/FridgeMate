@@ -6,10 +6,12 @@ import { ListPage } from '../pages/list/list';
 import { NewItemPage } from '../pages/NewItem/NewItem';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import {HTTPResponse, HTTP} from '@ionic-native/http'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListService} from '../providers';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,13 @@ import {ListService} from '../providers';
     ListPage,
     NewItemPage,
     HomePage,
-    TabsPage,
+    TabsPage
   
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+  	HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +39,8 @@ import {ListService} from '../providers';
     StatusBar,
     SplashScreen,
     ListService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    HTTP,
+        {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
