@@ -1,9 +1,7 @@
 package main
 
 /*
-json server anschauen- einen erstellen
-dann Angular http post angucken für Items hochladen
-und dann angular get angucken für Items in liste anzeigen
+http request - ionic
 
 
 

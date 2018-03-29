@@ -13,10 +13,11 @@
 
 
     <ion-list *ngIf="list.length">
-        <ion-item-sliding *ngFor="let item of cart; let index=index">
+        <ion-item-sliding *ngFor="let item of list; let index=index">
           <ion-item>
-            <h2>{{item.name}}</h2>
-            <p>{{item.date}}</p>
+            <ion-label>{{item.name}}</ion-label>
+            <ion-label displayFormat="DD/MM/YYYY">{{item.date | date: 'dd/MM/yyyy'}}</ion-label>
+         <!--   <p>{{item.date}}</p> --> 
           </ion-item>
           <ion-item-options>
             <button (click)="removeFromList(index)" danger default ion-button icon-left>

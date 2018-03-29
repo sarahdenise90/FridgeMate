@@ -1,13 +1,10 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { NavController, Item } from 'ionic-angular';
+import { NavController, Item, Refresher, Loading } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import {AlertController} from 'ionic-angular';
 import {ListItem} from '../../models';
-import {ListService} from '../../providers';
-import { Http, Response } from '@angular/http';
-import { HTTP } from '@ionic-native/http';
-import { Observable } from 'rxjs/Observable';
+import {ListService} from '../../providers/list.service';
 
 
 @Component({
@@ -16,22 +13,31 @@ import { Observable } from 'rxjs/Observable';
 })
 
 
-
 @Injectable()
 export class ListPage implements OnInit {
   list: ListItem[] =[];  // war mal zum testen: Observable<any>
 
-  constructor(public navCtrl: NavController, private listService: ListService, private alertCtrl: AlertController, public http: HTTP) {
-
-
+  constructor(public navCtrl: NavController, private listService: ListService, private alertCtrl: AlertController) {
   }
-  ngOnInit(): void {
-    this.list= this.listService.getList();
   
+  ngOnInit(): void {
+    // this.list= this.listService.getList();
+    this.listService.getList().subscribe((items) => {
+      this.list = items;
+    }, (error) => {
+      console.error(error);
+    });
   }
 
+  /*doRefresh(refresher: Refresher){
+    const subscribtion = this.listService.getList().subscribe((items) => {this.list = items;
+    refresher.complete();
+  subscribtion.unsubscribe();}, () => refresher.complete());
+  }*/
+  
   ionViewDidEnter(): void{
-    if (this.list.length){
+    //setTimeout(this.ionViewDidEnter, 300)
+    if (this.listService.calcTotalSum() > 0){
       return;
     }
 
@@ -43,6 +49,9 @@ export class ListPage implements OnInit {
     alert.present();
   }
 
+  calcTotalSum(){
+    return this.listService.calcTotalSum();
+  }
   
 removeFromList(index: number): void{
   this.listService.removeListItem(index);
